@@ -26,18 +26,28 @@ queen.controller('DataController', function($scope) {
     ];
     $scope.selectedTeams = $scope.teams.slice();
 
-    $scope.excludeTeam = function(team) {
+    $scope.toggleTeam = function(team) {
         var index = $scope.selectedTeams.indexOf(team);
         if (index > -1) {
             $scope.selectedTeams.splice(index, 1);
         }
-    };
-
-    $scope.excludeTeam = function(team) {
-        var index = $scope.selectedTeams.indexOf(team);
-        if (index === -1) {
+        else {
             $scope.selectedTeams.push(team);
         }
+    };
+
+    $scope.selected = function(team) {
+        return $scope.selectedTeams.indexOf(team) !== -1;
+    };
+    $scope.flip = function($event) {
+        var index = Math.floor(Math.random() * $scope.selectedTeams.length);
+        var team = $scope.selectedTeams[index];
+        var el = $event.currentTarget.querySelector('span');
+        el.className = $scope.teamClass(team);
+console.log(index, team, $scope.teamClass(team));
+    };
+    $scope.teamClass = function(team) {
+        return 'team-board-' + $scope.teams.indexOf(team);
     };
 });
 

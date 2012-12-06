@@ -3,22 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>翻牌子 - 皇后养成计划 - 豌豆实验室</title>
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <style type="text/css">
+        body { background:url(images/bg.png) top center no-repeat; }
+        #boards {position:fixed;top:150px;overflow:hidden;width: 1227px;left: 50%; margin-left: -614px;}
+        #boards li {float:left;width:123px;height:395px;background:url(images/board.png) 0 0 no-repeat;margin-left: 15px;cursor:pointer;position:relative;}
+        #boards li:first-child{margin:0;}
+        #boards li span {width:123px;height:395px;display:block;content:'';opacity: 0;-webkit-transition: all 1s;}
+        #boards li .team-board-0 {opacity:1;background:url('images/0.png');}
+        #boards li .team-board-1 {opacity:1;background:url('images/1.png');}
+        #boards li .team-board-2 {opacity:1;background:url('images/2.png');}
+        #boards li .team-board-3 {opacity:1;background:url('images/3.png');}
+        #boards li .team-board-4 {opacity:1;background:url('images/4.png');}
+        #boards li .team-board-5 {opacity:1;background:url('images/5.png');}
+        #boards li .team-board-6 {opacity:1;background:url('images/6.png');}
+        #boards li .team-board-7 {opacity:1;background:url('images/7.png');}
+        #boards li .team-board-8 {opacity:1;background:url('images/8.png');}
+    </style>
 </head>
 <body ng-controller="DataController">
 
 <div ng-view></div>
 
-
 <script type="text/ng-template" id="config.html">
-<button class="btn btn-primary" ng-repeat="team in teams">{{team}}</button>
+<h1>选择待翻的 Team, 蓝色为参与，否则白色</h1>
+<ul class="unstyled">
+    <li style="margin:10px;" ng-repeat="team in teams"><button class="btn btn-large" ng-click="toggleTeam(team)" ng-class="{'btn-primary': selected(team)}">{{team}}</button></li>
+</ul>
+<a href="#/enjoy" class="btn btn-danger btn-large" style="margin:20px;">开始翻！</a>
 </script>
 <script type="text/ng-template" id="main.html">
-    1123
+<ul id="boards" class="unstyled">
+    <li ng-repeat="team in teams" ng-click="flip($event)"><span></span></li>
+</ul>
 </script>
 
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
