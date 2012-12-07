@@ -6,19 +6,23 @@
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <style type="text/css">
         body { background:url(images/bg.png) top center no-repeat; }
-        #boards {position:fixed;top:150px;overflow:hidden;width: 1227px;left: 50%; margin-left: -614px;}
-        #boards li {float:left;width:123px;height:395px;background:url(images/board.png) 0 0 no-repeat;margin-left: 15px;cursor:pointer;position:relative;}
+        #boards {position:fixed;top:100px;overflow:hidden;width: 1227px;left: 50%; margin-left: -614px;-webkit-perspective:1000px;padding: 50px 0;}
+        #boards li {float:left;width:123px;height:395px;margin-left: 15px;cursor:pointer;position:relative;-webkit-transition: 1s;-webkit-transform-style: preserve-3d;}
         #boards li:first-child{margin:0;}
-        #boards li span {width:123px;height:395px;display:block;content:'';opacity: 0;-webkit-transition: all 1s;}
-        #boards li .team-board-0 {opacity:1;background:url('images/0.png');}
-        #boards li .team-board-1 {opacity:1;background:url('images/1.png');}
-        #boards li .team-board-2 {opacity:1;background:url('images/2.png');}
-        #boards li .team-board-3 {opacity:1;background:url('images/3.png');}
-        #boards li .team-board-4 {opacity:1;background:url('images/4.png');}
-        #boards li .team-board-5 {opacity:1;background:url('images/5.png');}
-        #boards li .team-board-6 {opacity:1;background:url('images/6.png');}
-        #boards li .team-board-7 {opacity:1;background:url('images/7.png');}
-        #boards li .team-board-8 {opacity:1;background:url('images/8.png');}
+        #boards li .front,
+        #boards li .back {width:123px;height:395px;position:absolute;left:0;top:0;-webkit-backface-visibility:hidden;}
+        #boards li .front {z-index: 2;background:url(images/board.png) 0 0 no-repeat;}
+        #boards li .back {-webkit-transform: rotateY(180deg);}
+        #boards li.flipped {-webkit-transform: rotateY(180deg);}
+        #boards li.team-board-0 .back {background:url('images/0.png');}
+        #boards li.team-board-1 .back {background:url('images/1.png');}
+        #boards li.team-board-2 .back {background:url('images/2.png');}
+        #boards li.team-board-3 .back {background:url('images/3.png');}
+        #boards li.team-board-4 .back {background:url('images/4.png');}
+        #boards li.team-board-5 .back {background:url('images/5.png');}
+        #boards li.team-board-6 .back {background:url('images/6.png');}
+        #boards li.team-board-7 .back {background:url('images/7.png');}
+        #boards li.team-board-8 .back {background:url('images/8.png');}
     </style>
 </head>
 <body ng-controller="DataController">
@@ -34,7 +38,7 @@
 </script>
 <script type="text/ng-template" id="main.html">
 <ul id="boards" class="unstyled">
-    <li ng-repeat="team in teams" ng-click="flip($event)"><span></span></li>
+    <li ng-repeat="team in teams" ng-click="flip($event)"><span class="front"></span><span class="back"></span></li>
 </ul>
 </script>
 

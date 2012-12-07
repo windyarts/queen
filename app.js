@@ -42,9 +42,11 @@ queen.controller('DataController', function($scope) {
     $scope.flip = function($event) {
         var index = Math.floor(Math.random() * $scope.selectedTeams.length);
         var team = $scope.selectedTeams[index];
-        var el = $event.currentTarget.querySelector('span');
-        el.className = $scope.teamClass(team);
-console.log(index, team, $scope.teamClass(team));
+        var el = $event.currentTarget;
+        if (!el.classList.contains('flipped')) {
+            el.classList.add($scope.teamClass(team));
+            setTimeout(function() {el.classList.add('flipped')}, 1);
+        }
     };
     $scope.teamClass = function(team) {
         return 'team-board-' + $scope.teams.indexOf(team);
