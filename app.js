@@ -39,13 +39,17 @@ queen.controller('DataController', function($scope) {
     $scope.selected = function(team) {
         return $scope.selectedTeams.indexOf(team) !== -1;
     };
+    var isDone = false;
     $scope.flip = function($event) {
         var index = Math.floor(Math.random() * $scope.selectedTeams.length);
         var team = $scope.selectedTeams[index];
         var el = $event.currentTarget;
+        var sound = document.querySelector('#sound');
         if (!el.classList.contains('flipped')) {
             el.classList.add($scope.teamClass(team));
-            setTimeout(function() {el.classList.add('flipped')}, 1);
+            el.classList.add('flipped');
+            sound.load();
+            sound.play();
         }
     };
     $scope.teamClass = function(team) {
