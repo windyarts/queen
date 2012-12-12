@@ -6,14 +6,14 @@
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <style type="text/css">
         body { background:url(images/bg.png) top center no-repeat; }
-        #boards {position:fixed;top:100px;overflow:hidden;width: 1227px;left: 50%; margin-left: -614px;-webkit-perspective:1000px;padding: 50px 0;}
-        #boards li {float:left;width:123px;height:395px;margin-left: 15px;cursor:pointer;position:relative;-webkit-transition: 1s;-webkit-transform-style: preserve-3d;}
+        #boards {position:fixed;top:100px;width: 1227px;left: 50%; margin-left: -614px;-webkit-perspective:1000px;padding: 50px 0;}
+        #boards li {float:left;width:123px;height:395px;margin-left: 15px;cursor:pointer;position:relative;-webkit-transform-style: preserve-3d;}
         #boards li:first-child{margin:0;}
         #boards li .front,
         #boards li .back {width:123px;height:395px;position:absolute;left:0;top:0;-webkit-backface-visibility:hidden;}
         #boards li .front {z-index: 2;background:url(images/board.png) 0 0 no-repeat;}
         #boards li .back {-webkit-transform: rotateY(180deg);}
-        #boards li.flipped {-webkit-transform: rotateY(180deg);}
+        #boards li.flipped {-webkit-animation-name: flip;-webkit-animation-duration: 1s;-webkit-animation-timing-function:linear;-webkit-transform-origin: 50% 100%;-webkit-animation-fill-mode: forwards;z-index: 1000;}
         #boards li.team-board-0 .back {background:url('images/0.png');}
         #boards li.team-board-1 .back {background:url('images/1.png');}
         #boards li.team-board-2 .back {background:url('images/2.png');}
@@ -23,6 +23,21 @@
         #boards li.team-board-6 .back {background:url('images/6.png');}
         #boards li.team-board-7 .back {background:url('images/7.png');}
         #boards li.team-board-8 .back {background:url('images/8.png');}
+
+        @-webkit-keyframes flip {
+            0% {
+                -webkit-transfrom: rotate3d(0, 0, 0, 0);
+            }
+            40% {
+                -webkit-transform: translate3d(0, 0, 280px) rotate3d(1, 0, 0, 45deg);
+            }
+            70% {
+                -webkit-transform: translate3d(0, 50px, 395px) rotateX(135deg) rotateZ(-45deg);
+            }
+            100% {
+                -webkit-transform: translate3d(0, 0, 100px) rotateX(180deg) rotateZ(-180deg);
+            }
+        }
     </style>
 </head>
 <body ng-controller="DataController">

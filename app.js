@@ -41,6 +41,7 @@ queen.controller('DataController', function($scope) {
     };
     var isDone = false;
     $scope.flip = function($event) {
+        if (isDone) return;
         var index = Math.floor(Math.random() * $scope.selectedTeams.length);
         var team = $scope.selectedTeams[index];
         var el = $event.currentTarget;
@@ -49,7 +50,10 @@ queen.controller('DataController', function($scope) {
             el.classList.add($scope.teamClass(team));
             el.classList.add('flipped');
             sound.load();
-            sound.play();
+            setTimeout(function() {
+                sound.play();
+            }, 1000);
+            isDone = true;
         }
     };
     $scope.teamClass = function(team) {
